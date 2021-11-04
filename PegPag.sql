@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS endereco (
   referencia VARCHAR(45) NULL,
   vendedor_idvendedor INT ,
   cliente_idcliente INT ,
-  PRIMARY KEY (idendereco, vendedor_idvendedor, cliente_idcliente),
+  PRIMARY KEY (idendereco),
     FOREIGN KEY (vendedor_idvendedor)
     REFERENCES vendedor (idvendedor),
 
