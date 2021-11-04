@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS endereco (
   cep VARCHAR(45) NOT NULL,
   complemento VARCHAR(45) NOT NULL,
   referencia VARCHAR(45) NULL,
-  vendedor_idvendedor INT NULL,
-  cliente_idcliente INT NULL,
+  vendedor_idvendedor INT ,
+  cliente_idcliente INT ,
   PRIMARY KEY (idendereco, vendedor_idvendedor, cliente_idcliente),
     FOREIGN KEY (vendedor_idvendedor)
     REFERENCES vendedor (idvendedor),
@@ -69,8 +69,8 @@ CREATE TABLE IF NOT EXISTS pegpag.telefone (
   idtelefone INT NOT NULL AUTO_INCREMENT,
   ddd INT NOT NULL,
   numero VARCHAR(45) NOT NULL,
-  vendedor_idvendedor INT NULL,
-  cliente_idcliente INT NULL,
+  vendedor_idvendedor INT ,
+  cliente_idcliente INT ,
   PRIMARY KEY (idtelefone),
     FOREIGN KEY (vendedor_idvendedor)
     REFERENCES vendedor (idvendedor),
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS comercio (
   PRIMARY KEY (idcomercio),
  
     FOREIGN KEY (vendedor_idvendedor)
-    REFERENCES pegpag.vendedor (idvendedor)
+    REFERENCES vendedor (idvendedor)
    )
 ENGINE = InnoDB;
 
@@ -147,23 +147,22 @@ CREATE TABLE IF NOT EXISTS pedidos (
   valor DOUBLE NOT NULL,
   dataRecebido DATE NULL,
   estado VARCHAR(45) NOT NULL,
-  avalicao VARCHAR(45) NULL,
+  avalicao VARCHAR(45) ,
   tipopagamento VARCHAR(45) NOT NULL,
   cliente_idcliente INT NOT NULL,
-  quantidadeProdutos int not null,
+  quantidadeProdutos INT NOT NULL,
   produtos_idprodutos INT NOT NULL,
   produtos_comercio_idcomercio INT NOT NULL,
   PRIMARY KEY (idpedidos),
- 
+  FOREIGN KEY (produtos_idprodutos )
+    REFERENCES produtos (idprodutos ),
+     FOREIGN KEY ( produtos_comercio_idcomercio)
+    REFERENCES produtos (comercio_idcomercio),
+    
     FOREIGN KEY (cliente_idcliente)
-    REFERENCES cliente (idcliente),
-  
-    FOREIGN KEY (produtos_idprodutos , produtos_comercio_idcomercio)
-    REFERENCES .produtos (idprodutos , comercio_idcomercio)
+    REFERENCES cliente (idcliente)
     )
 ENGINE = InnoDB;
 
+select * from cliente;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
